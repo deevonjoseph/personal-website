@@ -38,4 +38,8 @@ The site is published with GitHub Pages from the `main` branch (root). Commits a
 
 ## Collaboration & reflection
 
-*(Section for partner discussion — roles, what each person contributed, what we'd do differently.)*
+We split the work simply: one person focused on the HTML structure and content, and the other on the stylesheet and images, then we reviewed each other's work before committing.
+
+What went well: planning the layout first kept the HTML and CSS in sync, and using separate commits made it easy to see what changed and why.
+
+What we would improve: we would agree on the colour palette and spacing before writing any code, and start earlier so there is more time to test on different screen sizes.
