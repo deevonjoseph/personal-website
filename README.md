@@ -1,16 +1,16 @@
 # Personal Website
 
-A personal portfolio site built for the Web Design coursework. Hand-written HTML5 and CSS3 — no frameworks, no build tools — published with GitHub Pages.
+A personal portfolio site built for the Web Design coursework. Hand-written HTML5 and CSS3 with no frameworks or build tools, published with GitHub Pages.
 
 **Live site:** https://deevonjoseph.github.io/personal-website/
 
 ## What's on the page
 
-- **Navigation** — a `nav` with an unordered list linking to the four sections (`#home`, `#about`, `#portfolio`, `#contact`) with hover effects.
-- **Home** — hero with profile photo, name and tagline.
-- **About** — short bio plus a **table** listing skills, proficiency and the tools behind them.
-- **Portfolio** — three project cards: a YouTube video embedded with an `<iframe>`, and two screenshots of previous work.
-- **Contact** — email, GitHub and YouTube links.
+- **Navigation:** a `nav` with an unordered list linking to the four sections (`#home`, `#about`, `#portfolio`, `#contact`) with hover effects.
+- **Home:** hero with profile photo, name and tagline.
+- **About:** short bio plus a **table** listing skills, proficiency and the tools behind them.
+- **Portfolio:** three project cards, a YouTube video embedded with an `<iframe>` and two screenshots of previous work.
+- **Contact:** email, GitHub and YouTube links.
 
 ## File structure
 
@@ -34,12 +34,12 @@ The stylesheet follows the patterns from the CSS lab: `nav ul` is reset (`list-s
 
 ## Publishing
 
-The site is published with GitHub Pages from the `main` branch (root). Commits are structured by concern — markup, styles, images, docs — so the history reads as a progression rather than one dump.
+The site is published with GitHub Pages from the `main` branch (root). We committed the files in separate steps rather than one big commit, so the history shows how the site was built up.
 
 ## Collaboration & reflection
 
 My partner and I split the work between us: one of us handled the HTML structure and content while the other handled the styling and images, and we looked over each other's work before committing.
 
-The planning stage helped the most. Sketching the layout before coding kept the HTML and CSS aligned, and committing changes in separate steps made the history easy to follow.
+The planning stage helped the most. Sketching the layout before coding kept the HTML and CSS lined up, and working in separate commits meant we always knew what we had just changed.
 
 If we did it again, we would agree on colours and spacing at the start rather than adjusting them halfway through, and leave more time to test the layout on different screen sizes.
