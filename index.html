@@ -3,112 +3,239 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deevon Joseph | Personal Website</title>
+    <meta name="theme-color" content="#f5f1e8">
+    <title>Deevon Joseph — Web Design &amp; Video Editing</title>
+    <meta name="description" content="Portfolio of Deevon Joseph, an Information Technology student at T. A. Marryshow Community College who builds web pages by hand and edits anime music videos.">
+
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <!-- Fonts are loaded once in the head instead of with @import inside the stylesheet,
+         so the browser can start fetching them before it parses the CSS. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+    <!-- Keyboard users can jump past the repeated navigation. -->
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- The header stays at the top while the page scrolls. On small screens the
+         full name is hidden so the monogram and the three links fit on one row. -->
+    <header class="site-header">
+        <div class="wrap header-inner">
+            <a class="brand" href="#top" aria-label="Deevon Joseph, back to top">
+                <span class="brand-mark" aria-hidden="true">DJ</span>
+                <span class="brand-name">Deevon Joseph</span>
+            </a>
+            <nav aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#work">Work</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main>
-        <section id="home" class="hero">
-            <img src="images/profile.jpg" alt="Portrait of Deevon Joseph" class="profile-photo">
-            <h1>Deevon Joseph</h1>
-            <p class="tagline">Information Technology Student &bull; Video Editor</p>
-            <p class="intro">I'm Deevon. Most of what's on here came out of my classes, plus the videos I cut on weekends.</p>
-        </section>
+    <main id="main" tabindex="-1">
+        <!-- Hero: a short introduction and a local portrait. The headline is the
+             page's only h1, so every other section starts at h2. -->
+        <section class="hero" id="top" aria-labelledby="hero-title">
+            <div class="wrap hero-grid">
+                <div class="hero-copy">
+                    <p class="eyebrow">Portfolio <span aria-hidden="true">/</span> 2026</p>
+                    <h1 id="hero-title">Deevon Joseph builds web pages and <em>cuts video.</em></h1>
+                    <p class="lede">I am an Information Technology student at T.&nbsp;A. Marryshow Community College. I write HTML and CSS by hand, and I spend my free time editing anime music videos for YouTube.</p>
+                    <a class="text-link" href="#work">See the work <span aria-hidden="true">&darr;</span></a>
+                </div>
 
-        <section id="about">
-            <h2>About Me</h2>
-            <p>I am an Information Technology student at T. A. Marryshow Community College, currently working in section 2A. My coursework covers the full stack of web development, from front-end interfaces with HTML and CSS to the servers and databases behind them.</p>
-            <p>Outside of class I am a video editor. I create anime music video edits and short-form content that I publish on YouTube, where I handle everything from the script and cut to the final export. Most of what I have picked up in class went into this site: I wrote the markup by hand, styled it myself, and pushed it live through GitHub.</p>
+                <figure class="portrait">
+                    <img src="images/profile.jpg" alt="Deevon Joseph in a blue suit and bow tie at an evening event" width="440" height="560">
+                    <figcaption>Deevon Joseph <span aria-hidden="true">&middot;</span> profile</figcaption>
+                </figure>
+            </div>
 
-            <h3>Skills</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Skill</th>
-                        <th>Proficiency</th>
-                        <th>Tools &amp; Technologies</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>HTML5 &amp; CSS3</td>
-                        <td>Intermediate</td>
-                        <td>Semantic markup, selectors, layout styling, hover effects</td>
-                    </tr>
-                    <tr>
-                        <td>Version Control</td>
-                        <td>Intermediate</td>
-                        <td>Git, GitHub, GitHub Desktop, publishing with GitHub Pages</td>
-                    </tr>
-                    <tr>
-                        <td>Full-Stack Concepts</td>
-                        <td>Familiar</td>
-                        <td>React, Node.js, PostgreSQL, Nginx</td>
-                    </tr>
-                    <tr>
-                        <td>Video Editing</td>
-                        <td>Advanced</td>
-                        <td>AMV edits, script-driven cuts, YouTube publishing</td>
-                    </tr>
-                    <tr>
-                        <td>Written Communication</td>
-                        <td>Advanced</td>
-                        <td>Technical reports and research documentation</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <section id="portfolio">
-            <h2>Portfolio</h2>
-            <div class="projects">
-                <article class="card">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/HPhxcZIRPT8" title="You - Naruto vs Sasuke AMV Edit" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    <h3>Naruto vs Sasuke AMV Edit</h3>
-                    <p>A scripted remake of one of my anime music video edits. I planned the timing around the track, cut the sequences, and published the final piece on YouTube.</p>
-                    <a class="button" href="https://youtu.be/HPhxcZIRPT8" target="_blank" rel="noopener">Watch on YouTube</a>
-                </article>
-
-                <article class="card">
-                    <img src="images/portfolio-css-lab.png" alt="Screenshot of the Plan Page pricing layout from my CSS lab">
-                    <h3>Plan Page: CSS Selectors Lab</h3>
-                    <p>A three-column pricing layout built from a fixed HTML file using only CSS: selectors, inline-block cards, hover states and a background image.</p>
-                    <a class="button" href="https://deevonjoseph.github.io/css-selectors-lab/" target="_blank" rel="noopener">View live site</a>
-                </article>
-
-                <article class="card">
-                    <img src="images/portfolio-site.jpg" alt="Screenshot of this personal website">
-                    <h3>Personal Website</h3>
-                    <p>The site you are on right now. Hand-written HTML5 and CSS3 with no framework or template, then published with GitHub Pages.</p>
-                    <a class="button" href="https://github.com/deevonjoseph/personal-website" target="_blank" rel="noopener">View source on GitHub</a>
-                </article>
+            <!-- A description list keeps the labels and values paired in the markup.
+                 CSS turns the pairs into three columns on larger screens. -->
+            <div class="wrap">
+                <dl class="facts">
+                    <div>
+                        <dt>Studying</dt>
+                        <dd>Information Technology, 2A</dd>
+                    </div>
+                    <div>
+                        <dt>College</dt>
+                        <dd>T. A. Marryshow Community College</dd>
+                    </div>
+                    <div>
+                        <dt>Focus</dt>
+                        <dd>Web design &amp; video editing</dd>
+                    </div>
+                </dl>
             </div>
         </section>
 
-        <section id="contact">
-            <h2>Contact</h2>
-            <p>You can reach me through any of these:</p>
-            <ul class="contact-list">
-                <li>Email: <a href="mailto:josephdeevon@gmail.com">josephdeevon@gmail.com</a></li>
-                <li>GitHub: <a href="https://github.com/deevonjoseph" target="_blank" rel="noopener">github.com/deevonjoseph</a></li>
-                <li>YouTube: <a href="https://youtu.be/HPhxcZIRPT8" target="_blank" rel="noopener">My latest edit</a></li>
-            </ul>
+        <!-- About: a two-column block on desktop, with the skills panel set
+             beside the prose as an aside rather than buried in the text. -->
+        <section class="section" id="about" aria-labelledby="about-title">
+            <div class="wrap section-grid">
+                <header class="section-head">
+                    <p class="section-index" aria-hidden="true">01</p>
+                    <h2 id="about-title">About</h2>
+                </header>
+
+                <div class="section-body about-grid">
+                    <div class="prose">
+                        <p class="standfirst">I came into IT through editing. Web design turned out to work the same way.</p>
+                        <p>Cutting an anime music video means matching frames to a beat, trimming until the timing feels right, and exporting again when it does not. Building a page is similar: you move one element, check the result at a few widths, and adjust.</p>
+                        <p>At TAMCC I am working through the front end first &mdash; semantic HTML, the box model, selectors, flexbox and grid &mdash; then the pieces behind it: JavaScript, Node.js, PostgreSQL and Nginx. Outside class I keep my YouTube channel going and experiment with new edits.</p>
+                        <p>This site is the result: hand-written markup, one stylesheet, and no framework or page builder.</p>
+                    </div>
+
+                    <aside class="toolkit" aria-labelledby="toolkit-title">
+                        <h3 id="toolkit-title">Toolkit</h3>
+                        <dl>
+                            <div>
+                                <dt>Markup</dt>
+                                <dd>HTML5, CSS3, responsive layout</dd>
+                            </div>
+                            <div>
+                                <dt>Scripting</dt>
+                                <dd>JavaScript basics, React (coursework)</dd>
+                            </div>
+                            <div>
+                                <dt>Back end</dt>
+                                <dd>Node.js, PostgreSQL, Nginx (coursework)</dd>
+                            </div>
+                            <div>
+                                <dt>Version control</dt>
+                                <dd>Git, GitHub, GitHub Pages</dd>
+                            </div>
+                            <div>
+                                <dt>Video</dt>
+                                <dd>AMV edits, beat-matched cuts, YouTube publishing</dd>
+                            </div>
+                        </dl>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <!-- Externally hosted image: the file lives on Wikimedia Commons and is
+             loaded by URL. The figcaption supplies the title, author, source and
+             licence, which the CC BY-SA licence requires. -->
+        <figure class="field-note">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/St._George%27s_Inner_Harbour_2.JPG/1920px-St._George%27s_Inner_Harbour_2.JPG"
+                 alt="Wide view of St. George's harbour in Grenada, with green hills, flowering trees and a yellow catamaran on the water"
+                 width="1920" height="548" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+            <figcaption>
+                <span class="wrap">St. George&rsquo;s Inner Harbour, Grenada. Photo by dpursoo via
+                    <a href="https://commons.wikimedia.org/wiki/File:St._George%27s_Inner_Harbour_2.JPG" target="_blank" rel="noopener">Wikimedia Commons</a>,
+                    <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>.
+                    <span class="visually-hidden">(opens in a new tab)</span>
+                </span>
+            </figcaption>
+        </figure>
+
+        <!-- Work: the video is the feature and spans the full grid; the two
+             build projects sit side by side underneath on tablet and desktop. -->
+        <section class="section" id="work" aria-labelledby="work-title">
+            <div class="wrap section-grid">
+                <header class="section-head">
+                    <p class="section-index" aria-hidden="true">02</p>
+                    <h2 id="work-title">Work</h2>
+                </header>
+
+                <div class="section-body">
+                    <p class="standfirst work-intro">One edit and two builds. Each one taught me something the next project needed.</p>
+
+                    <div class="project-grid">
+                        <article class="project project--feature">
+                            <div class="project-media">
+                                <!-- The iframe is wrapped so CSS can hold a 16:9 ratio at any width. -->
+                                <div class="video-frame">
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/HPhxcZIRPT8" title="You - Naruto vs Sasuke AMV Edit" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                            <div class="project-copy">
+                                <p class="project-kicker">Video edit</p>
+                                <h3>Naruto vs Sasuke &mdash; AMV edit</h3>
+                                <p>A scripted remake of one of my anime music video edits. I timed the cuts to the track, assembled the sequence, and published the final cut on YouTube.</p>
+                                <ul class="tags" aria-label="Project tags">
+                                    <li>YouTube</li>
+                                    <li>Editing</li>
+                                    <li>Timing</li>
+                                </ul>
+                                <a class="arrow-link" href="https://youtu.be/HPhxcZIRPT8" target="_blank" rel="noopener">Watch on YouTube <span aria-hidden="true">&nearr;</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+                            </div>
+                        </article>
+
+                        <article class="project">
+                            <figure class="project-media">
+                                <img src="images/portfolio-css-lab.png" alt="Screenshot of the three-column Plan Page pricing layout from my CSS selectors lab" width="1365" height="655" loading="lazy" decoding="async">
+                            </figure>
+                            <div class="project-copy">
+                                <p class="project-kicker">CSS build</p>
+                                <h3>Plan Page &mdash; CSS selectors lab</h3>
+                                <p>A three-column pricing page built from a fixed HTML file using only CSS: selectors, inline-block cards, hover states and a background image.</p>
+                                <ul class="tags" aria-label="Project tags">
+                                    <li>HTML</li>
+                                    <li>CSS</li>
+                                    <li>No JavaScript</li>
+                                </ul>
+                                <a class="arrow-link" href="https://deevonjoseph.github.io/css-selectors-lab/" target="_blank" rel="noopener">View live site <span aria-hidden="true">&nearr;</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+                            </div>
+                        </article>
+
+                        <article class="project">
+                            <figure class="project-media">
+                                <img src="images/portfolio-site.jpg" alt="Screenshot of the redesigned personal website" width="1440" height="810" loading="lazy" decoding="async">
+                            </figure>
+                            <div class="project-copy">
+                                <p class="project-kicker">This site</p>
+                                <h3>Personal website</h3>
+                                <p>The page you are reading. Hand-written HTML5 and a mobile-first stylesheet, with no framework or template, published with GitHub Pages.</p>
+                                <ul class="tags" aria-label="Project tags">
+                                    <li>HTML</li>
+                                    <li>CSS</li>
+                                    <li>GitHub Pages</li>
+                                </ul>
+                                <a class="arrow-link" href="https://github.com/deevonjoseph/personal-website" target="_blank" rel="noopener">View source <span aria-hidden="true">&nearr;</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- A dark closing band gives the page a clear end and makes the email
+             address the strongest call to action on the page. <address> is the
+             correct element for the author's contact details. -->
+        <section class="contact" id="contact" aria-labelledby="contact-title">
+            <div class="wrap contact-grid">
+                <div>
+                    <p class="eyebrow eyebrow--light">03 <span aria-hidden="true">/</span> Contact</p>
+                    <h2 id="contact-title">Say <em>hello.</em></h2>
+                    <p class="contact-lede">Email is the quickest way to reach me. I check it most days after class.</p>
+                </div>
+
+                <address class="contact-details">
+                    <a class="contact-email" href="mailto:josephdeevon@gmail.com">josephdeevon@gmail.com <span aria-hidden="true">&nearr;</span></a>
+                    <ul class="contact-links">
+                        <li><a href="https://github.com/deevonjoseph" target="_blank" rel="noopener">GitHub <span aria-hidden="true">&nearr;</span><span class="visually-hidden"> (opens in a new tab)</span></a></li>
+                        <li><a href="https://youtu.be/HPhxcZIRPT8" target="_blank" rel="noopener">YouTube <span aria-hidden="true">&nearr;</span><span class="visually-hidden"> (opens in a new tab)</span></a></li>
+                    </ul>
+                </address>
+            </div>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2026 Deevon Joseph &bull; Built with HTML5 and CSS3 &bull; Published with GitHub Pages</p>
+    <footer class="site-footer">
+        <div class="wrap footer-inner">
+            <p>&copy; <time datetime="2026">2026</time> Deevon Joseph. Built by hand with HTML and CSS.</p>
+            <p>Set in Fraunces and Inter. <a href="#top">Back to top <span aria-hidden="true">&uarr;</span></a></p>
+        </div>
     </footer>
 </body>
 </html>
