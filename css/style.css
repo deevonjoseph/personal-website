@@ -3,26 +3,32 @@
    A warm, print-inspired layout built mobile-first.
 
    Contents
-   01. Design tokens
+   01. Design tokens (light and dark)
    02. Reset and base elements
    03. Layout helpers
-   04. Header and navigation
-   05. Hero
+   04. Header, navigation and theme toggle
+   05. Hero and live clock
    06. Shared section layout
    07. About and toolkit
    08. External photo band
-   09. Work
-   10. Contact and footer
-   11. Tablet breakpoint (40rem / 640px)
-   12. Desktop breakpoint (64rem / 1024px)
-   13. Reduced motion
+   09. Work, filter and search
+   10. FAQ accordion
+   11. Contact and footer
+   12. Back-to-top button
+   13. Tablet breakpoint (40rem / 640px)
+   14. Desktop breakpoint (64rem / 1024px)
+   15. Reduced motion
    ========================================================================== */
 
 
 /* 01. Design tokens -------------------------------------------------------
    Paper and ink replace the old dark theme. The burnt orange is used for
    small labels, links and the italic words in display headings. Two values
-   exist for the accent so it stays readable on both light and dark grounds. */
+   exist for the accent so it stays readable on both light and dark grounds.
+
+   The dark contact band keeps its own variables instead of reusing --ink and
+   --paper, because those two swap over in dark mode and the band would turn
+   into a pale block in the middle of a dark page. */
 :root {
     --paper: #f5f1e8;
     --paper-deep: #ece5d7;
@@ -36,12 +42,76 @@
     --accent-bright: #f08a5d;
     --focus: #8f2e10;
 
+    --band-bg: #191913;
+    --band-fg: #f5f1e8;
+    --band-soft: #c9c3b4;
+    --band-line: #34342c;
+    --band-link: #d6d0c1;
+
+    --header-bg: rgba(245, 241, 232, 0.94);
+
     --font-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
     --font-body: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
 
     --wrap: 70rem;
     --gutter: clamp(1.25rem, 4vw, 2.5rem);
     --section-space: clamp(3.5rem, 8vw, 7rem);
+
+    color-scheme: light;
+}
+
+/* The dark values are written twice on purpose. The first copy is for
+   visitors whose operating system asks for dark, so the very first paint is
+   already correct without an inline script. The second copy is for the
+   toggle, which writes data-theme on the html element. */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --paper: #14140f;
+        --paper-deep: #1d1d16;
+        --card: #1b1b14;
+        --ink: #f4efe2;
+        --ink-soft: #c2bcac;
+        --ink-faint: #a29c8d;
+        --line: #33332a;
+        --line-dark: #3d3d33;
+        --accent: #f08a5d;
+        --accent-bright: #f6a67f;
+        --focus: #f6a67f;
+
+        --band-bg: #0d0d09;
+        --band-fg: #f4efe2;
+        --band-soft: #b3ad9e;
+        --band-line: #2a2a22;
+        --band-link: #d9d3c4;
+
+        --header-bg: rgba(20, 20, 15, 0.9);
+
+        color-scheme: dark;
+    }
+}
+
+:root[data-theme="dark"] {
+    --paper: #14140f;
+    --paper-deep: #1d1d16;
+    --card: #1b1b14;
+    --ink: #f4efe2;
+    --ink-soft: #c2bcac;
+    --ink-faint: #a29c8d;
+    --line: #33332a;
+    --line-dark: #3d3d33;
+    --accent: #f08a5d;
+    --accent-bright: #f6a67f;
+    --focus: #f6a67f;
+
+    --band-bg: #0d0d09;
+    --band-fg: #f4efe2;
+    --band-soft: #b3ad9e;
+    --band-line: #2a2a22;
+    --band-link: #d9d3c4;
+
+    --header-bg: rgba(20, 20, 15, 0.9);
+
+    color-scheme: dark;
 }
 
 
@@ -55,6 +125,7 @@
 html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    background-color: var(--paper);
 }
 
 body {
@@ -65,6 +136,7 @@ body {
     font-size: 1rem;
     line-height: 1.7;
     text-rendering: optimizeLegibility;
+    transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 h1,
@@ -169,14 +241,16 @@ a:hover {
 }
 
 
-/* 04. Header and navigation ----------------------------------------------
-   Mobile first: the name is hidden and only the monogram plus the three
-   links are shown, so the header never wraps or needs a hamburger menu. */
+/* 04. Header, navigation and theme toggle --------------------------------
+   Mobile first: the name is hidden and only the monogram, four short links
+   and the theme button are shown, so the header never wraps or needs a
+   hamburger menu. The gaps and type are tightened below 640px to make room
+   for the extra link and the toggle. */
 .site-header {
     position: sticky;
     top: 0;
     z-index: 50;
-    background-color: rgba(245, 241, 232, 0.94);
+    background-color: var(--header-bg);
     border-bottom: 1px solid var(--line);
     backdrop-filter: blur(10px);
 }
@@ -185,8 +259,15 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
+    gap: 0.5rem;
     min-height: 4rem;
+}
+
+.header-tools {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
 }
 
 .brand {
@@ -204,8 +285,8 @@ a:hover {
 .brand-mark {
     display: grid;
     place-items: center;
-    width: 2.35rem;
-    height: 2.35rem;
+    width: 2.15rem;
+    height: 2.15rem;
     border-radius: 50%;
     background-color: var(--ink);
     color: var(--paper);
@@ -224,7 +305,7 @@ a:hover {
 .nav-list {
     display: flex;
     align-items: center;
-    gap: clamp(0.75rem, 3vw, 1.75rem);
+    gap: 0.55rem;
 }
 
 .nav-list a {
@@ -233,7 +314,7 @@ a:hover {
     min-height: 2.75rem;
     border-bottom: 1px solid transparent;
     color: var(--ink-soft);
-    font-size: 0.82rem;
+    font-size: 0.76rem;
     font-weight: 500;
     letter-spacing: 0.02em;
     text-decoration: none;
@@ -244,8 +325,42 @@ a:hover {
     color: var(--accent);
 }
 
+/* A round icon button. aria-pressed carries the state, so the label can stay
+   the same in both themes and the control never jumps around. */
+.theme-toggle {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background-color: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
 
-/* 05. Hero ---------------------------------------------------------------- */
+.theme-toggle:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+}
+
+.theme-icon--sun {
+    display: none;
+}
+
+:root[data-theme="dark"] .theme-icon--moon {
+    display: none;
+}
+
+:root[data-theme="dark"] .theme-icon--sun {
+    display: block;
+}
+
+
+/* 05. Hero and live clock ------------------------------------------------- */
 .hero {
     padding-top: clamp(2.5rem, 7vw, 5rem);
 }
@@ -496,9 +611,12 @@ h2 {
 }
 
 
-/* 09. Work ---------------------------------------------------------------- */
+/* 09. Work, filter and search --------------------------------------------
+   The controls sit on a ruled strip above the cards: category buttons on the
+   left, the search box on the right. Both are squared off to match the rest
+   of the page rather than using rounded pills. */
 .work-intro {
-    margin-bottom: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 1.5rem;
 }
 
 .project-grid {
@@ -535,7 +653,7 @@ h2 {
 .video-frame {
     position: relative;
     aspect-ratio: 16 / 9;
-    background-color: var(--ink);
+    background-color: var(--band-bg);
 }
 
 .video-frame iframe {
@@ -609,11 +727,11 @@ h2 {
 }
 
 
-/* 10. Contact and footer -------------------------------------------------- */
+/* 11. Contact and footer -------------------------------------------------- */
 .contact {
     padding-block: clamp(4rem, 9vw, 7rem);
-    background-color: var(--ink);
-    color: var(--paper);
+    background-color: var(--band-bg);
+    color: var(--band-fg);
 }
 
 .eyebrow--light {
@@ -626,7 +744,7 @@ h2 {
 }
 
 .contact h2 {
-    color: var(--paper);
+    color: var(--band-fg);
     font-size: clamp(2.8rem, 8vw, 5.5rem);
     line-height: 0.95;
     letter-spacing: -0.04em;
@@ -639,7 +757,7 @@ h2 {
 .contact-lede {
     max-width: 38ch;
     margin-top: 1.25rem;
-    color: #c9c3b4;
+    color: var(--band-soft);
     font-size: 1rem;
 }
 
@@ -656,7 +774,7 @@ h2 {
     max-width: 100%;
     padding-bottom: 0.2rem;
     border-bottom: 1px solid var(--accent-bright);
-    color: var(--paper);
+    color: var(--band-fg);
     font-family: var(--font-display);
     font-size: clamp(1.1rem, 3vw, 1.7rem);
     line-height: 1.25;
@@ -676,8 +794,8 @@ h2 {
 
 .contact-links a {
     padding-bottom: 0.25rem;
-    border-bottom: 1px solid var(--ink-faint);
-    color: #c9c3b4;
+    border-bottom: 1px solid var(--band-line);
+    color: var(--band-soft);
     font-size: 0.72rem;
     letter-spacing: 0.1em;
     text-decoration: none;
@@ -685,8 +803,8 @@ h2 {
 }
 
 .contact-links a:hover {
-    border-bottom-color: var(--paper);
-    color: var(--paper);
+    border-bottom-color: var(--band-fg);
+    color: var(--band-fg);
 }
 
 .contact :focus-visible,
@@ -696,9 +814,9 @@ h2 {
 
 .site-footer {
     padding-block: 1.6rem;
-    background-color: var(--ink);
-    border-top: 1px solid var(--line-dark);
-    color: #a9a497;
+    background-color: var(--band-bg);
+    border-top: 1px solid var(--band-line);
+    color: var(--band-soft);
     font-size: 0.72rem;
 }
 
@@ -709,22 +827,43 @@ h2 {
 }
 
 .site-footer a {
-    border-bottom: 1px solid var(--line-dark);
-    color: #d6d0c1;
+    border-bottom: 1px solid var(--band-line);
+    color: var(--band-link);
     text-decoration: none;
 }
 
 .site-footer a:hover {
-    color: var(--paper);
+    color: var(--band-fg);
 }
 
 
-/* 11. Tablet breakpoint: 640px -------------------------------------------
-   The header can show the full name, the facts become three columns, and
-   the two smaller projects sit side by side. */
+/* 13. Tablet breakpoint: 640px -------------------------------------------
+   The header can show the full name and space the links out again, the facts
+   become three columns, and the two smaller projects sit side by side. */
 @media (min-width: 40rem) {
+    .header-inner {
+        gap: 1rem;
+    }
+
+    .header-tools {
+        gap: 1rem;
+    }
+
+    .brand-mark {
+        width: 2.35rem;
+        height: 2.35rem;
+    }
+
     .brand-name {
         display: inline;
+    }
+
+    .nav-list {
+        gap: clamp(0.85rem, 2.4vw, 1.75rem);
+    }
+
+    .nav-list a {
+        font-size: 0.82rem;
     }
 
     .hero-grid {
@@ -767,7 +906,7 @@ h2 {
 }
 
 
-/* 12. Desktop breakpoint: 1024px -----------------------------------------
+/* 14. Desktop breakpoint: 1024px -----------------------------------------
    The section number and title move into their own left-hand rail, the hero
    becomes two columns, and the featured project puts video and copy side by
    side. */
@@ -828,7 +967,7 @@ h2 {
 }
 
 
-/* 13. Reduced motion ------------------------------------------------------ */
+/* 15. Reduced motion ------------------------------------------------------ */
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
