@@ -405,4 +405,5 @@
             output.setAttribute('datetime', currentYear);
         }
     });
+
 }());
