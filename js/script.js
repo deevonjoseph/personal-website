@@ -222,4 +222,51 @@
 
         applyFilters();
     }
+
+
+    /* ----------------------------------------------------------------------
+       03. FAQ accordion
+       One panel is open at a time. The button carries aria-expanded and the
+       panel is made inert while closed, so its text is skipped by screen
+       readers and by the Tab key even though it is still in the page.
+       ---------------------------------------------------------------------- */
+
+    const faqItems = Array.from(document.querySelectorAll('.faq-item'));
+
+    function setFaqItem(item, isOpen) {
+        const trigger = item.querySelector('.faq-trigger');
+        const panel = item.querySelector('.faq-panel');
+
+        item.classList.toggle('is-open', isOpen);
+
+        if (trigger) {
+            trigger.setAttribute('aria-expanded', String(isOpen));
+        }
+
+        if (panel) {
+            panel.inert = !isOpen;
+        }
+    }
+
+    faqItems.forEach(function (item) {
+        const trigger = item.querySelector('.faq-trigger');
+
+        setFaqItem(item, false);
+
+        if (!trigger) {
+            return;
+        }
+
+        trigger.addEventListener('click', function () {
+            const willOpen = trigger.getAttribute('aria-expanded') !== 'true';
+
+            faqItems.forEach(function (other) {
+                if (other !== item) {
+                    setFaqItem(other, false);
+                }
+            });
+
+            setFaqItem(item, willOpen);
+        });
+    });
 }());

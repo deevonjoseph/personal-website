@@ -34,6 +34,7 @@
                     <ul class="nav-list">
                         <li><a href="#about">About</a></li>
                         <li><a href="#work">Work</a></li>
+                        <li><a href="#faq">FAQ</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </nav>
@@ -248,13 +249,87 @@
             </div>
         </section>
 
+        <!-- FAQ: short answers to the questions that arrive by email most often.
+             Each answer is a button plus a panel, so the whole row is clickable
+             and works with the keyboard. -->
+        <section class="section" id="faq" aria-labelledby="faq-title">
+            <div class="wrap section-grid">
+                <header class="section-head">
+                    <p class="section-index" aria-hidden="true">03</p>
+                    <h2 id="faq-title">FAQ</h2>
+                </header>
+
+                <div class="section-body">
+                    <p class="standfirst work-intro">Four things people ask before they send the first email.</p>
+
+                    <div class="faq-list">
+                        <div class="faq-item">
+                            <h3 class="faq-question">
+                                <button class="faq-trigger" type="button" id="faq-trigger-1" aria-expanded="false" aria-controls="faq-panel-1">
+                                    <span>What did you build this site with?</span>
+                                    <span class="faq-icon" aria-hidden="true"></span>
+                                </button>
+                            </h3>
+                            <div class="faq-panel" id="faq-panel-1" role="region" aria-labelledby="faq-trigger-1">
+                                <div>
+                                    <p>Hand-written HTML5, one stylesheet and one JavaScript file. There is no framework, template or build step, and the whole thing is published from a GitHub repository with GitHub Pages.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <h3 class="faq-question">
+                                <button class="faq-trigger" type="button" id="faq-trigger-2" aria-expanded="false" aria-controls="faq-panel-2">
+                                    <span>Can I use one of your edits?</span>
+                                    <span class="faq-icon" aria-hidden="true"></span>
+                                </button>
+                            </h3>
+                            <div class="faq-panel" id="faq-panel-2" role="region" aria-labelledby="faq-trigger-2">
+                                <div>
+                                    <p>Ask first, by email. I usually say yes for small channels and class projects. Credit the channel and link back to the original video rather than re-uploading the file somewhere else.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <h3 class="faq-question">
+                                <button class="faq-trigger" type="button" id="faq-trigger-3" aria-expanded="false" aria-controls="faq-panel-3">
+                                    <span>Do you take on website work?</span>
+                                    <span class="faq-icon" aria-hidden="true"></span>
+                                </button>
+                            </h3>
+                            <div class="faq-panel" id="faq-panel-3" role="region" aria-labelledby="faq-trigger-3">
+                                <div>
+                                    <p>Small pages, yes. Coursework comes first during the semester, so a one or two page site is realistic and a full shop is not. Send a short description of what you need and I will tell you honestly whether I can do it.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <h3 class="faq-question">
+                                <button class="faq-trigger" type="button" id="faq-trigger-4" aria-expanded="false" aria-controls="faq-panel-4">
+                                    <span>Why is there a dark mode?</span>
+                                    <span class="faq-icon" aria-hidden="true"></span>
+                                </button>
+                            </h3>
+                            <div class="faq-panel" id="faq-panel-4" role="region" aria-labelledby="faq-trigger-4">
+                                <div>
+                                    <p>It was added for the JavaScript module. The button in the header swaps the colour values, and the choice is remembered in your browser, so the page opens the same way next time. With no saved choice it follows your system setting.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- A dark closing band gives the page a clear end and makes the email
              address the strongest call to action on the page. <address> is the
              correct element for the author's contact details. -->
         <section class="contact" id="contact" aria-labelledby="contact-title">
             <div class="wrap contact-grid">
                 <div>
-                    <p class="eyebrow eyebrow--light">03 <span aria-hidden="true">/</span> Contact</p>
+                    <p class="eyebrow eyebrow--light">04 <span aria-hidden="true">/</span> Contact</p>
                     <h2 id="contact-title">Say <em>hello.</em></h2>
                     <p class="contact-lede">Email is the quickest way to reach me. I check it most days after class.</p>
                 </div>
