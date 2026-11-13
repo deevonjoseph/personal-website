@@ -269,4 +269,40 @@
             setFaqItem(item, willOpen);
         });
     });
+
+
+    /* ----------------------------------------------------------------------
+       04. Back-to-top button
+       The button stays out of the way until the page has been scrolled, then
+       fades in at the bottom right. Focus moves back to the main content so a
+       keyboard user does not have to tab from the bottom of the page again.
+       ---------------------------------------------------------------------- */
+
+    const toTopButton = document.getElementById('to-top');
+
+    if (toTopButton) {
+        const SHOW_AFTER = 480;
+
+        /* The browser already fires scroll at most once per frame, so the
+           check runs directly instead of being wrapped in requestAnimationFrame. */
+        function updateToTop() {
+            toTopButton.classList.toggle('is-visible', window.scrollY > SHOW_AFTER);
+        }
+
+        window.addEventListener('scroll', updateToTop, { passive: true });
+
+        toTopButton.addEventListener('click', function () {
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+
+            const main = document.getElementById('main');
+
+            if (main) {
+                main.focus({ preventScroll: true });
+            }
+        });
+
+        updateToTop();
+    }
 }());

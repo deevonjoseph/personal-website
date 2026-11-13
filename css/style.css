@@ -1040,6 +1040,47 @@ h2 {
 }
 
 
+/* 12. Back-to-top button --------------------------------------------------
+   Fixed in the bottom corner, out of the way until the page is scrolled.
+   visibility is transitioned with a delay so the fade-out is still seen,
+   while the fade-in starts immediately. */
+.to-top {
+    position: fixed;
+    right: var(--gutter);
+    bottom: 1.5rem;
+    z-index: 40;
+    display: grid;
+    place-items: center;
+    width: 2.9rem;
+    height: 2.9rem;
+    padding: 0;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    background-color: var(--accent);
+    color: var(--paper);
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(0.75rem);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0s linear 0.25s;
+}
+
+.to-top.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0s linear 0s;
+}
+
+.to-top:hover {
+    background-color: var(--ink);
+    border-color: var(--ink);
+    color: var(--paper);
+}
+
+
 /* 13. Tablet breakpoint: 640px -------------------------------------------
    The header can show the full name and space the links out again, the facts
    become three columns, and the two smaller projects sit side by side. */
