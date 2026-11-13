@@ -305,4 +305,104 @@
 
         updateToTop();
     }
+
+
+    /* ----------------------------------------------------------------------
+       05. Live date, time and greeting
+       The hero shows the current day and time in Grenada (the site's home
+       time zone) and a greeting that changes through the day. The year in the
+       eyebrow and the footer is filled from the same date.
+       ---------------------------------------------------------------------- */
+
+    const TIME_ZONE = 'America/Grenada';
+
+    const greetingOutput = document.getElementById('hero-greeting');
+    const dateOutput = document.getElementById('hero-date');
+    const timeOutput = document.getElementById('hero-time');
+    const yearOutputs = document.querySelectorAll('[data-year]');
+
+    const dateFormat = new Intl.DateTimeFormat('en-GB', {
+        timeZone: TIME_ZONE,
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    });
+
+    const timeFormat = new Intl.DateTimeFormat('en-GB', {
+        timeZone: TIME_ZONE,
+        hour: 'numeric',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+    });
+
+    const hourFormat = new Intl.DateTimeFormat('en-GB', {
+        timeZone: TIME_ZONE,
+        hour: 'numeric',
+        hour12: false
+    });
+
+    function hourInGrenada(now) {
+        const hourPart = hourFormat.formatToParts(now).find(function (part) {
+            return part.type === 'hour';
+        });
+
+        return hourPart ? Number(hourPart.value) % 24 : now.getHours();
+    }
+
+    function greetingForHour(hour) {
+        if (hour < 5) {
+            return 'Working late';
+        }
+
+        if (hour < 12) {
+            return 'Good morning';
+        }
+
+        if (hour < 17) {
+            return 'Good afternoon';
+        }
+
+        if (hour < 21) {
+            return 'Good evening';
+        }
+
+        return 'Good night';
+    }
+
+    function updateClock() {
+        const now = new Date();
+
+        if (greetingOutput) {
+            greetingOutput.textContent = greetingForHour(hourInGrenada(now));
+        }
+
+        if (dateOutput) {
+            dateOutput.textContent = dateFormat.format(now);
+        }
+
+        if (timeOutput) {
+            timeOutput.textContent = timeFormat.format(now);
+            timeOutput.setAttribute('datetime', now.toISOString());
+        }
+    }
+
+    if (greetingOutput || dateOutput || timeOutput) {
+        updateClock();
+        window.setInterval(updateClock, 1000);
+    }
+
+    const currentYear = new Intl.DateTimeFormat('en-GB', {
+        timeZone: TIME_ZONE,
+        year: 'numeric'
+    }).format(new Date());
+
+    yearOutputs.forEach(function (output) {
+        output.textContent = currentYear;
+
+        if (output.tagName === 'TIME') {
+            output.setAttribute('datetime', currentYear);
+        }
+    });
 }());

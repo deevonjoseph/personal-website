@@ -438,6 +438,72 @@ h2 em {
     color: var(--accent);
 }
 
+/* The greeting, date and clock. Each part after the greeting carries its own
+   separator, which disappears when the part is empty, so the line still reads
+   correctly before the script has filled it in. */
+.hero-now {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.3rem 0.5rem;
+    margin-top: 1.5rem;
+    color: var(--ink-faint);
+    font-size: 0.7rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+.hero-now-dot {
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background-color: var(--accent);
+    animation: now-pulse 2.6s ease-in-out infinite;
+}
+
+.hero-now-detail::before {
+    content: "\00b7";
+    margin-right: 0.5rem;
+    color: var(--line);
+}
+
+.hero-now-detail:empty {
+    display: none;
+}
+
+/* On phones the line would wrap with a stray separator at the start of the
+   second line, so the three parts are stacked and the separators are dropped. */
+@media (max-width: 39.999rem) {
+    .hero-now {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 0.2rem 0.55rem;
+    }
+
+    .hero-now-dot {
+        align-self: center;
+    }
+
+    .hero-now-detail {
+        grid-column: 2;
+    }
+
+    .hero-now-detail::before {
+        content: none;
+    }
+}
+
+@keyframes now-pulse {
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+}
+
 /* The portrait is mounted like a print: a thin ink frame, a paper mat and a
    caption inside the frame. */
 .portrait {
