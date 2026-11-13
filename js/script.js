@@ -88,4 +88,138 @@
             paintTheme(event.matches ? 'dark' : 'light');
         }
     });
+
+
+    /* ----------------------------------------------------------------------
+       02. Project filter and search
+       The category buttons and the search box work together: a project is
+       shown only when it matches both the chosen category and the typed
+       words. The search text is prepared once, at start-up, so typing never
+       re-reads the whole page.
+       ---------------------------------------------------------------------- */
+
+    function normalise(text) {
+        return text.toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+    function textOf(card, selector) {
+        const element = card.querySelector(selector);
+        return element ? element.textContent : '';
+    }
+
+    const filterGroup = document.getElementById('project-filters');
+    const searchField = document.getElementById('project-search');
+    const filterStatus = document.getElementById('project-status');
+    const emptyMessage = document.getElementById('project-empty');
+
+    /* Only the words that describe a project are searchable: its title, its
+       kicker, its description and the keywords on the article. The tag list is
+       left out, so a search for "JavaScript" does not match a card tagged
+       "No JavaScript". */
+    const projects = Array.from(document.querySelectorAll('.project[data-category]')).map(function (card) {
+        return {
+            card: card,
+            category: card.dataset.category,
+            searchText: normalise([
+                textOf(card, 'h3'),
+                textOf(card, '.project-kicker'),
+                textOf(card, '.project-copy p:not(.project-kicker)'),
+                card.dataset.keywords || ''
+            ].join(' '))
+        };
+    });
+
+    let activeCategory = 'all';
+
+    function countProjects(category) {
+        return projects.filter(function (project) {
+            return category === 'all' || project.category === category;
+        }).length;
+    }
+
+    function describeResults(shown, query) {
+        const total = projects.length;
+
+        if (shown === total && query === '') {
+            return 'Showing all ' + total + ' projects.';
+        }
+
+        if (shown === 0) {
+            return query === ''
+                ? 'No projects in this category.'
+                : 'No projects match \u201c' + query + '\u201d.';
+        }
+
+        return 'Showing ' + shown + ' of ' + total + ' projects' +
+            (query === '' ? '.' : ' for \u201c' + query + '\u201d.');
+    }
+
+    function applyFilters() {
+        const query = searchField ? normalise(searchField.value) : '';
+        let shown = 0;
+
+        projects.forEach(function (project) {
+            const inCategory = activeCategory === 'all' || project.category === activeCategory;
+            const matchesText = query === '' || project.searchText.indexOf(query) !== -1;
+            const isVisible = inCategory && matchesText;
+
+            project.card.hidden = !isVisible;
+
+            if (isVisible) {
+                shown += 1;
+            }
+        });
+
+        if (filterStatus) {
+            filterStatus.textContent = describeResults(shown, query);
+        }
+
+        if (emptyMessage) {
+            emptyMessage.hidden = shown !== 0;
+        }
+    }
+
+    if (projects.length > 0 && filterGroup) {
+
+        /* The counts are read from the markup rather than typed twice, so a
+           new project card only has to be added in one place. */
+        filterGroup.querySelectorAll('[data-count]').forEach(function (output) {
+            const count = countProjects(output.dataset.count);
+            output.textContent = count > 0 ? String(count) : '';
+        });
+
+        filterGroup.addEventListener('click', function (event) {
+            const button = event.target.closest('[data-filter]');
+
+            if (!button || !filterGroup.contains(button)) {
+                return;
+            }
+
+            activeCategory = button.dataset.filter;
+
+            filterGroup.querySelectorAll('[data-filter]').forEach(function (other) {
+                const isActive = other === button;
+
+                other.classList.toggle('is-active', isActive);
+                other.setAttribute('aria-pressed', String(isActive));
+            });
+
+            applyFilters();
+        });
+
+        if (searchField) {
+            searchField.addEventListener('input', applyFilters);
+
+            /* Escape clears the box and restores the full list, which is the
+               behaviour people expect from a search field. */
+            searchField.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape' && searchField.value !== '') {
+                    searchField.value = '';
+                    applyFilters();
+                }
+            });
+        }
+
+        applyFilters();
+    }
 }());

@@ -167,8 +167,30 @@
                 <div class="section-body">
                     <p class="standfirst work-intro">One edit and two builds. Each one taught me something the next project needed.</p>
 
+                    <!-- The category buttons and the search box are two views of the
+                         same list: a card shows only when it matches both. The small
+                         numbers are counted from the cards by js/script.js. -->
+                    <div class="project-tools">
+                        <div class="filter-group" id="project-filters" role="group" aria-label="Filter projects by type">
+                            <button class="filter-btn is-active" type="button" data-filter="all" aria-pressed="true">All <span class="filter-count" data-count="all"></span></button>
+                            <button class="filter-btn" type="button" data-filter="web" aria-pressed="false">Web <span class="filter-count" data-count="web"></span></button>
+                            <button class="filter-btn" type="button" data-filter="video" aria-pressed="false">Video <span class="filter-count" data-count="video"></span></button>
+                        </div>
+
+                        <div class="filter-search">
+                            <label class="visually-hidden" for="project-search">Search projects</label>
+                            <input type="search" id="project-search" name="project-search" placeholder="Search projects" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <!-- aria-live comes from role="status", so the count is read out
+                         after every filter change without moving focus. -->
+                    <p class="filter-status" id="project-status" role="status">Showing all 3 projects.</p>
+
+                    <p class="project-empty" id="project-empty" hidden>No project matches that search. Try a shorter word, or choose <strong>All</strong>.</p>
+
                     <div class="project-grid">
-                        <article class="project project--feature">
+                        <article class="project project--feature" data-category="video" data-keywords="amv anime naruto sasuke youtube editing timing cuts">
                             <div class="project-media">
                                 <!-- The iframe is wrapped so CSS can hold a 16:9 ratio at any width. -->
                                 <div class="video-frame">
@@ -188,7 +210,7 @@
                             </div>
                         </article>
 
-                        <article class="project">
+                        <article class="project" data-category="web" data-keywords="css selectors pricing plans lab html layout hover">
                             <figure class="project-media">
                                 <img src="images/portfolio-css-lab.png" alt="Screenshot of the three-column Plan Page pricing layout from my CSS selectors lab" width="1365" height="655" loading="lazy" decoding="async">
                             </figure>
@@ -205,7 +227,7 @@
                             </div>
                         </article>
 
-                        <article class="project">
+                        <article class="project" data-category="web" data-keywords="portfolio personal site github pages responsive redesign html css javascript theme filter search faq">
                             <figure class="project-media">
                                 <img src="images/portfolio-site.jpg" alt="Screenshot of the redesigned personal website" width="1440" height="810" loading="lazy" decoding="async">
                             </figure>

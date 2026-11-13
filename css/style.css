@@ -139,6 +139,12 @@ body {
     transition: background-color 0.25s ease, color 0.25s ease;
 }
 
+/* Cards and panels are flex or grid items, so the browser default for the
+   hidden attribute needs to win. The project filter relies on this. */
+[hidden] {
+    display: none !important;
+}
+
 h1,
 h2,
 h3 {
@@ -619,8 +625,106 @@ h2 {
     margin-bottom: 1.5rem;
 }
 
+.project-tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.9rem 1.5rem;
+    padding-block: 0.85rem;
+    border-block: 1px solid var(--line);
+}
+
+.filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 2.5rem;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--line);
+    background-color: transparent;
+    color: var(--ink-soft);
+    font-family: var(--font-body);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.filter-btn:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+}
+
+.filter-btn.is-active {
+    border-color: var(--ink);
+    background-color: var(--ink);
+    color: var(--paper);
+}
+
+.filter-count {
+    opacity: 0.6;
+    font-variant-numeric: tabular-nums;
+}
+
+.filter-count:empty {
+    display: none;
+}
+
+.filter-search {
+    flex: 1 1 13rem;
+    max-width: 20rem;
+}
+
+.filter-search input {
+    width: 100%;
+    min-height: 2.5rem;
+    padding: 0.4rem 0.7rem;
+    border: 1px solid var(--line);
+    border-radius: 0;
+    background-color: var(--card);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+}
+
+.filter-search input::placeholder {
+    color: var(--ink-faint);
+}
+
+.filter-search input:hover {
+    border-color: var(--ink);
+}
+
+.filter-status {
+    margin-top: 0.9rem;
+    color: var(--ink-faint);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.project-empty {
+    margin-top: clamp(1.75rem, 3vw, 2.5rem);
+    padding: 2.25rem 1.5rem;
+    border: 1px dashed var(--line);
+    color: var(--ink-soft);
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    text-align: center;
+}
+
 .project-grid {
     display: grid;
+    margin-top: clamp(1.75rem, 3vw, 2.5rem);
     gap: clamp(2rem, 4vw, 3rem);
 }
 
