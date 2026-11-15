@@ -80,10 +80,19 @@ personal-website/
 │   ├── portfolio-amv.jpg   # still from the AMV edit
 │   ├── portfolio-css-lab.png
 │   └── portfolio-site.jpg  # screenshot of this site
+├── screenshots/            # evidence for the JavaScript assignment
+│   ├── 01-light-theme.png
+│   ├── 02-dark-theme.png
+│   ├── 03-project-filter.png
+│   ├── 04-faq-accordion.png
+│   ├── 05-back-to-top.png
+│   ├── 06-live-clock.png
+│   └── 07-mobile-390.png
+├── SUBMISSION.md           # the brief's checklist with the answers filled in
 └── README.md
 ```
 
-The stylesheet lives in `css/`, the script in `js/` and every image in `images/`. All references are relative (`css/style.css`, `js/script.js`, `images/profile.jpg`), so the site works from a local folder and from GitHub Pages without changes. The harbour photo is the one exception: it is linked by URL and is not stored in the repository.
+The stylesheet lives in `css/`, the script in `js/` and every image in `images/`. All references are relative (`css/style.css`, `js/script.js`, `images/profile.jpg`), so the site works from a local folder and from GitHub Pages without changes. The harbour photo is the one exception: it is linked by URL and is not stored in the repository. `screenshots/` holds the evidence images for the assignment and is not used by the page itself.
 
 ## Viewing the site
 
@@ -134,6 +143,20 @@ I checked every feature by hand and then measured the page at ten widths in Chro
 The difference between the two columns is the scrollbar. At every width `scrollWidth` matched `clientWidth`, so the page never scrolls sideways. The header stays on one row at all sizes: 64px tall on phones and tablets, 72px from 1024px up, with 18px to spare between the monogram and the navigation at 320px. The four links and the theme button fit without a hamburger menu.
 
 The browser console is clean on load and after using every feature. The only warning in the earlier version came from the YouTube embed's `allow` attribute and was removed.
+
+## Screenshots
+
+Seven screenshots, taken from the live GitHub Pages site at 1440×900, are stored in [`screenshots/`](screenshots). Each one shows a different feature working.
+
+| File | What it shows |
+|---|---|
+| [`01-light-theme.png`](screenshots/01-light-theme.png) | The page in the light theme, with the theme button in the header. |
+| [`02-dark-theme.png`](screenshots/02-dark-theme.png) | The same page after pressing the theme button, with the choice saved. |
+| [`03-project-filter.png`](screenshots/03-project-filter.png) | The Work section filtered to **Web** with `css` typed in the search box: “Showing 2 of 3 projects”. |
+| [`04-faq-accordion.png`](screenshots/04-faq-accordion.png) | The FAQ with the first answer open and the other three closed. |
+| [`05-back-to-top.png`](screenshots/05-back-to-top.png) | The back-to-top button visible in the bottom corner after scrolling. |
+| [`06-live-clock.png`](screenshots/06-live-clock.png) | Close-up of the live greeting, date and time. |
+| [`07-mobile-390.png`](screenshots/07-mobile-390.png) | The page at 390px wide, with the header on one row and the clock stacked. |
 
 ## Accessibility notes
 
